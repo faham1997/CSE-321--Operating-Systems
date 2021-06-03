@@ -1,0 +1,12 @@
+ip help
+ip helper-address 10.1.1.2 
+ip dhcp ex
+ip dhcp excluded-address 192.168.10.1 ?
+ip dhcp excluded-address 192.168.10.1 192.168.10.10
+ip dhcp pool R1-LAN
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+dns-server 192.168.20.254
+ip dhcp pool R3-LAN
+interface gigabitEthernet 0/1
+ip address dhcp

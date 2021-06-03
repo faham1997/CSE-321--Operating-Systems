@@ -1,0 +1,179 @@
+Incase of Router 1:
+
+Task 2:
+
+Router>enable 
+Router#erase startup-config 
+Router#reload
+no
+
+no
+
+Task 3:
+Router>enable
+Router# conf t
+Router(config)#hostname R1
+R1(config)#no ip domain-lookup
+R1(config)#enable secret class
+R1(config)#banner motd &
+******************************** 
+  !!!AUTHORIZED ACCESS ONLY!!!
+******************************** 
+& 
+R1(config)#line console 0  
+R1(config-line)#password cisco
+R1(config-line)#login  
+R1(config-line)#exit
+R1(config)#line vty 0 4  
+R1(config-line)#password cisco
+R1(config-line)#login  
+R1(config-line)#exit
+R1(config)#interface fastethernet 0/0 
+R1(config-if)#ip address 192.168.1.1 255.255.255.0
+R1(config-if)#no shutdown 
+R1(config-if)#interface serial 0/0/0 
+R1(config-if)#ip address 192.168.2.1 255.255.255.0
+R1(config-if)#clock rate 64000 
+R1(config-if)#no shutdown
+R1(config-if)#end
+R1#copy run start
+
+
+R1#show running-config
+Building configuration...
+
+Current configuration : 948 bytes
+!
+version 12.3
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname R1
+!
+!
+!
+enable secret 5 $1$mERr$9cTjUIEqNGurQiFU.ZeCi1
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+
+R1#show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+C    192.168.1.0/24 is directly connected, FastEthernet0/0
+C    192.168.2.0/24 is directly connected, Serial0/0/0
+
+R1#show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol 
+FastEthernet0/0        192.168.1.1     YES manual up                    up 
+FastEthernet0/1        unassigned      YES NVRAM  administratively down down 
+Serial0/0/0            192.168.2.1     YES manual up                    up 
+Serial0/0/1            unassigned      YES NVRAM  administratively down down 
+Vlan1                  unassigned      YES unset  administratively    
+
+
+
+Incase of Router 2:
+
+Task 2:
+Router>enable 
+Router#erase startup-config 
+Router#reload
+no
+
+no
+
+Task 3:
+Router>enable
+Router# conf t
+Router(config)#hostname R2
+R2(config)#no ip domain-lookup
+R2(config)#enable secret class
+R2(config)#banner motd & 
+******************************** 
+  !!!AUTHORIZED ACCESS ONLY!!!
+******************************** 
+& 
+R2(config)#line console 0  
+R2(config-line)#password cisco 
+R2(config-line)#login  
+R2(config-line)#exit
+R2(config)#line vty 0 4  
+R2(config-line)#password cisco
+R2(config-line)#login  
+R2(config-line)#exit
+R2(config)#interface serial 0/0/0 
+R2(config-if)#ip address 192.168.2.2 255.255.255.0 
+R2(config-if)#no shutdown
+R2(config-if)#interface fastethernet 0/0 
+R2(config-if)#ip address 192.168.3.1 255.255.255.0 
+R2(config-if)#no shutdown 
+R2(config-if)#end
+R2#copy run start 
+
+R2#show running-config
+Building configuration...
+
+Current configuration : 915 bytes
+!
+version 12.3
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R2
+!
+!
+!
+enable secret 5 $1$mERr$9cTjUIEqNGurQiFU.ZeCi1
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+
+R2#show ip route
+Codes: C - connected, S - static, I - IGRP, R - RIP, M - mobile, B - BGP
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
+       E1 - OSPF external type 1, E2 - OSPF external type 2, E - EGP
+       i - IS-IS, L1 - IS-IS level-1, L2 - IS-IS level-2, ia - IS-IS inter area
+       * - candidate default, U - per-user static route, o - ODR
+       P - periodic downloaded static route
+
+Gateway of last resort is not set
+
+C    192.168.2.0/24 is directly connected, Serial0/0/0
+C    192.168.3.0/24 is directly connected, FastEthernet0/0
+
+R2#show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol 
+FastEthernet0/0        192.168.3.1     YES manual up                    up 
+FastEthernet0/1        unassigned      YES NVRAM  administratively down down 
+Serial0/0/0            192.168.2.2     YES manual up                    up 
+Serial0/0/1            unassigned      YES NVRAM  administratively down down 
+Vlan1                  unassigned      YES unset  administratively down down
+
+
+
+
